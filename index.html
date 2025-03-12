@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel {
+      background: #fff;
+      display: flex;
+      border-radius: 50px;
+      padding: 5px;
+      gap: 5px;
+      z-index: 2;
+      border: 2px solid gray;
+    }
+
+    .selected {
+      border-radius: 50%;
+      background: #000;
+      padding: 10px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .selected i {
+      color: #fff;
+    }
+
+    .option {
+      border: 2px solid grey;
+      border-radius: 50%;
+      padding: 10px;
+      width: 10px;
+      height: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: inherit;
+      z-index: 1;
+    }
+
+    .system::before {
+      animation: expand-system 0.7s cubic-bezier(0.5, 0, 0.2, 1.2) forwards;
+    }
+
+    .light::before {
+      animation: expand-light 0.7s cubic-bezier(0.5, 0, 0.2, 1.2) forwards;
+    }
+
+    .dark::before {
+      animation: expand-dark 0.7s cubic-bezier(0.5, 0, 0.2, 1.2) forwards;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .system::before {
+        animation: expand-system-light 0.7s cubic-bezier(0.5, 0, 0.2, 1.2) forwards;
+      }
+    }
+
+    @keyframes expand-system {
+      0% {
+        background: #000;
+        clip-path: circle(0% at 100% 100%);
+      }
+
+      100% {
+        background: #000;
+        clip-path: circle(200% at 100% 100%);
+      }
+    }
+
+    @keyframes expand-system-light {
+      0% {
+        background: #fff;
+        clip-path: circle(0% at 100% 100%);
+      }
+
+      100% {
+        background: #fff;
+        clip-path: circle(200% at 100% 100%);
+      }
+    }
+
+    @keyframes expand-light {
+      0% {
+        background: #fff;
+        clip-path: circle(0% at 100% 100%);
+      }
+
+      100% {
+        background: #fff;
+        clip-path: circle(200% at 100% 100%);
+      }
+    }
+
+    @keyframes expand-dark {
+      0% {
+        background: #000;
+        clip-path: circle(0% at 100% 100%);
+      }
+
+      100% {
+        background: #000;
+        clip-path: circle(200% at 100% 100%);
+      }
+    }
+  </style>
+</head>
+
+<body class="system">
+
+<div class="panel">
+      
+  <div id="system" onclick="switchMode(this)" class="option selected">
+    <i class="fa-solid fa-desktop"></i>
+  </div>
+
+  <div id="light" onclick="switchMode(this)" class="option">
+    <i class="fa-solid fa-sun"></i>
+  </div>
+
+  <div id="dark" onclick="switchMode(this)" class="option">
+    <i class="fa-solid fa-moon"></i>
+  </div>
+
+</div>
+
+<script>
+function switchMode(el) {
+  document
+  .querySelectorAll(".option")
+  .forEach((opt) => opt.classList.remove("selected"));
+  el.classList.add("selected");
+  document.body.classList.remove("system", "light", "dark");
+
+  if (el.id === "system") {
+    document.body.classList.add("system");
+    setTimeout(() => {
+    document.body.style.background = window.matchMedia("prefers-color-scheme: light)")
+    .matches ? "#fff" : "#000";
+    }, 700);
+  } else if (el.id === "light") {
+      document.body.classList.add("light");
+      setTimeout(() => (document.body.style.background = "#fff"), 700);
+  } else if (el.id === "dark"){
+      document.body.classList.add("dark");
+      setTimeout(() => (document.body.style.background = "#000"), 700);
+    }
+}
+</script>
+</body>
+</html>
