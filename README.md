@@ -4,8 +4,7 @@ This project is a simple animated theme switcher using HTML, CSS, and JavaScript
 
 ### Features  
 - Light, Dark, and System themes  
-- Smooth transition animations  
-- Responsive design  
+- Smooth transition animations 
 
 ### Icons  
 Icons used in this project are from [Font Awesome](https://fontawesome.com/).  
